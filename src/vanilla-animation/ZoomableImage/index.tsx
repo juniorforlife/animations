@@ -1,8 +1,8 @@
 import React, {useRef} from 'react';
 import {Animated, View, PanResponder} from 'react-native';
+import type {ImageSourcePropType} from 'react-native/Libraries/Image/ImageSourcePropType';
 
 import styles from './styles';
-import {WINDOW_WIDTH, WINDOW_HEIGHT} from '../../utils';
 
 interface Point {
   x: number;
@@ -10,18 +10,12 @@ interface Point {
 }
 
 interface ZoomableImageProps {
+  uri: ImageSourcePropType;
   width: number;
   height: number;
   cropWidth: number;
   cropHeight: number;
 }
-
-const DefaultProps: ZoomableImageProps = {
-  width: 0,
-  height: 0,
-  cropWidth: WINDOW_WIDTH,
-  cropHeight: WINDOW_HEIGHT
-};
 
 const calcDistance = (pointA: Point, pointB: Point) => {
   return Math.sqrt(
@@ -37,6 +31,7 @@ const calcCenterPoint = (pointA: Point, pointB: Point) => {
 };
 
 const ZoomableImage: React.FC<ZoomableImageProps> = ({
+  uri,
   width: imageWidth,
   height: imageHeight,
   cropWidth,
@@ -158,7 +153,7 @@ const ZoomableImage: React.FC<ZoomableImageProps> = ({
   return (
     <View style={[styles.container, {width: cropWidth, height: cropHeight}]}>
       <Animated.Image
-        source={require('../../../assets/images/avengers.jpg')}
+        source={uri}
         style={[
           styles.image,
           {width: imageWidth, height: imageHeight},
@@ -169,6 +164,5 @@ const ZoomableImage: React.FC<ZoomableImageProps> = ({
     </View>
   );
 };
-ZoomableImage.defaultProps = DefaultProps;
 
 export default ZoomableImage;

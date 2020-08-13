@@ -18,7 +18,7 @@ const AnimatedTouchable = Animated.createAnimatedComponent(TouchableOpacity);
 interface SwipeableListProps {
   data: any[];
   onDelete: (id: string) => void;
-  isDeleting: boolean;
+  isDeleting?: boolean;
 }
 
 const SwipeableList: React.FC<SwipeableListProps> = ({

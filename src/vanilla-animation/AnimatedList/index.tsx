@@ -2,11 +2,14 @@ import React, {useRef} from 'react';
 import {Animated, View, TouchableOpacity, Text, FlatList} from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
-import {WINDOW_HEIGHT, WINDOW_WIDTH} from '../../utils';
 import styles from './styles';
 import {COVER_IMG_HEIGHT, PROFILE_IMG_SIZE} from './styles';
+import {WINDOW_HEIGHT, WINDOW_WIDTH} from '../../utils';
+import {Dummy} from '../../data/dummyData';
 
-interface AnimatedListProps {}
+interface AnimatedListProps {
+  data: Dummy[];
+}
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
 
 const SCROLL_OFFSET = WINDOW_HEIGHT / 4;
@@ -87,11 +90,11 @@ const AnimatedList: React.FC<AnimatedListProps> = ({data}) => {
 
       <Animated.Image
         style={[styles.coverImg, coverAnimation]}
-        source={require('../../../assets/images/vancouver.jpg')}
+        source={require('../../assets/images/cover.jpg')}
       />
       <Animated.Image
         style={[styles.profileImg, profileAnimation]}
-        source={require('../../../assets/images/alex.jpg')}
+        source={require('../../assets/images/girl0.jpg')}
       />
 
       <AnimatedFlatList
@@ -121,7 +124,7 @@ const AnimatedList: React.FC<AnimatedListProps> = ({data}) => {
         scrollEventThrottle={16}
         style={styles.postList}
         data={data}
-        renderItem={({item}) => {
+        renderItem={() => {
           return (
             <TouchableOpacity style={styles.postContainer}>
               <Text>
@@ -130,9 +133,7 @@ const AnimatedList: React.FC<AnimatedListProps> = ({data}) => {
             </TouchableOpacity>
           );
         }}
-        keyExtractor={(item, index: number) =>
-          item.id ? item.id.toString() : index.toString()
-        }
+        keyExtractor={(item, index: number) => index.toString()}
       />
     </View>
   );

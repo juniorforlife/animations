@@ -30,11 +30,6 @@ export default ({navigation}) => {
         <Text>Draggable Bottom Sheet</Text>
       </TouchableOpacity>
       <TouchableOpacity
-        onPress={() => navigate('ModalScreen')}
-        style={styles.item}>
-        <Text>Modal</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
         onPress={() => navigate('SwipeDeckScreen')}
         style={styles.item}>
         <Text>Swipe Deck</Text>
@@ -53,6 +48,11 @@ export default ({navigation}) => {
         onPress={() => navigate('PickPhoneColorScreen')}
         style={styles.item}>
         <Text>Pick phone color</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => navigate('CubeCarouselScreen')}
+        style={styles.item}>
+        <Text>Cube Carousel</Text>
       </TouchableOpacity>
     </View>
   );

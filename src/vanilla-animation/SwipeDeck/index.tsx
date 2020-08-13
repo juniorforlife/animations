@@ -3,14 +3,10 @@ import {Animated, View, PanResponder} from 'react-native';
 
 import styles from './styles';
 import {WINDOW_WIDTH} from '../../utils';
-
-interface User {
-  id: number;
-  avatar: string;
-}
+import {UserModel} from '../../data/usersData';
 
 interface DeckProps {
-  data: User[];
+  data: UserModel[];
 }
 
 const SwipeDeck = (props: DeckProps) => {
@@ -62,7 +58,7 @@ const SwipeDeck = (props: DeckProps) => {
       return null;
     }
     return data
-      .map((item: User, index) => {
+      .map((item: UserModel, index) => {
         if (index >= cardIndex) {
           const isActiveCard = cardIndex === index;
           let cardAnimation = {};
@@ -108,10 +104,7 @@ const SwipeDeck = (props: DeckProps) => {
             <Animated.View
               key={item.id}
               style={[styles.cardContainer, cardAnimation]}>
-              <Animated.Image
-                source={{uri: item.avatar}}
-                style={[styles.cardImg]}
-              />
+              <Animated.Image source={item.avatar} style={[styles.cardImg]} />
               {isActiveCard && (
                 <React.Fragment>
                   <Animated.Text

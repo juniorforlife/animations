@@ -1,19 +1,19 @@
-import React, {useState} from 'react';
-import {View, TouchableOpacity, Text} from 'react-native';
+import React from 'react';
+import {View, StyleSheet} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
 import {
   AnimatedList,
   DraggableBottomSheet,
-  Modal,
   SwipeDeck,
   ZoomableImage,
   SwipeableList,
-  PickPhoneColor
+  PickPhoneColor,
+  CubeCarousel
 } from '../vanilla-animation';
-import users from '../vanilla-animation/SwipeDeck/data';
-import {WINDOW_WIDTH} from '../utils';
-import dummyData from '../dummyData';
+import {WINDOW_WIDTH, WINDOW_HEIGHT} from '../utils';
+import users from '../data/usersData';
+import dummyData from '../data/dummyData';
 
 export {default as HomeScreen} from './HomeScreen';
 
@@ -23,23 +23,9 @@ export const AnimatedListScreen = () => {
 
 export const DraggableBottomScreen = () => {
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: 'grey'}}>
+    <SafeAreaView style={styles.flex1Gray}>
       <DraggableBottomSheet />
     </SafeAreaView>
-  );
-};
-
-export const ModalScreen = () => {
-  const [modalVisible, setModalVisibility] = useState<boolean>(false);
-  const showModal = () => setModalVisibility(true);
-  const hideModal = () => setModalVisibility(false);
-  return (
-    <View style={{flex: 1}}>
-      <TouchableOpacity onPress={showModal} style={{marginTop: 100}}>
-        <Text>Show modal</Text>
-      </TouchableOpacity>
-      <Modal isVisible={modalVisible} onClose={hideModal} title="Modal" />
-    </View>
   );
 };
 
@@ -49,16 +35,41 @@ export const SwipeDeckScreen = () => {
 
 export const ZoomableImageScreen = () => {
   return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <ZoomableImage width={WINDOW_WIDTH} height={200} />
+    <View style={styles.flex1CenterBoth}>
+      <ZoomableImage
+        uri={require('../assets/images/cover.jpg')}
+        width={WINDOW_WIDTH}
+        height={200}
+        cropWidth={WINDOW_WIDTH}
+        cropHeight={WINDOW_HEIGHT}
+      />
     </View>
   );
 };
 
 export const SwipeableListScreen = () => {
-  return <SwipeableList data={dummyData} />;
+  return <SwipeableList data={dummyData} onDelete={() => {}} />;
 };
 
 export const PickPhoneColorScreen = () => {
   return <PickPhoneColor />;
 };
+
+export const CubeCarouselScreen = () => {
+  return <CubeCarousel data={users} />;
+};
+
+const styles = StyleSheet.create({
+  flex1: {
+    flex: 1
+  },
+  flex1Gray: {
+    flex: 1,
+    backgroundColor: 'grey'
+  },
+  flex1CenterBoth: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
+});
